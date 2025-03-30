@@ -20,7 +20,7 @@ bool Curso::curso_completo(){
     return listado_estudiante.size() > 20;
 }
 
-bool Curso::verificacion_inscripcion(Estudiante estudiante){
+bool Curso::verificacion_inscripcion(shared_ptr<Estudiante> estudiante){
     int pos = 0;
     encontrar_estudiante(estudiante, pos);
     return pos != listado_estudiante.size();
@@ -32,7 +32,7 @@ void Curso::incribir_estudiante(Estudiante estudiante){
     listado_estudiante.push_back(estudiante);
 }
 
-void Curso::desinscribir_estudiante(Estudiante estudiante){
+void Curso::desinscribir_estudiante(shared_ptr<Estudiante> estudiante){
     int pos = 0;
     encontrar_estudiante(estudiante, pos);
     if (pos == listado_estudiante.size()) throw invalid_argument("El estudiante que desea eliminar no se encuentra en el curso");
@@ -46,11 +46,4 @@ void Curso::imprimir_listado(){
     for(Estudiante& estudiante: listado_estudiante){
         cout<<estudiante<<endl;
     }
-
 }
-
-
-
-
-
-
