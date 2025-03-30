@@ -1,12 +1,10 @@
 #include "Estudiante.h"
 
 
-
 ostream& operator<<(std::ostream& os, const Estudiante& estudiante) {
     os << estudiante.nombre_completo; //el objeto os ahora es el nombre compl del estudiante con la sobrecaga
     return os;
 }
-
 
 double Estudiante::calcular_promedio_general(vector<pair<string, double>> cursos_notas){
     double promedio = 0;
