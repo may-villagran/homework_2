@@ -40,7 +40,12 @@ void Curso::desinscribir_estudiante(Estudiante estudiante){
 }
 
 void Curso::imprimir_listado(){
-    
+    //como sort usa < y ahora que esta sobrecragado hace el orden bajo las condiciones de la sobrecarga
+    sort(listado_estudiante.begin(), listado_estudiante.end());
+    cout<<"Listado de alumnas inscriptos al curso: "<<nombr_curso<<endl;
+    for(Estudiante& estudiante: listado_estudiante){
+        cout<<estudiante<<endl;
+    }
 
 }
 

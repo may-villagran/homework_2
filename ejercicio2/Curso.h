@@ -1,7 +1,5 @@
 #pragma once
-#include <algorithm>
 #include "Estudiante.h"
-
 class Curso{
     private:
         string nombr_curso;
