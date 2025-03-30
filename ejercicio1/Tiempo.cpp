@@ -1,74 +1,85 @@
 #include "Tiempo.h"
 //validacion de los constructores
 void Tiempo::validacion_entrada_horas(int horas){
-    if(horas<0 || horas>12) throw out_of_range("Por lo menos hay un valor de la hora que se encuentran fuera del rango.");
+    if(horas<0 || horas>12) throw out_of_range("La hora está fuera del rango permitido (0-12).");
 }
+
 void Tiempo::validacion_entrada_min_segs(int minutos_segundos){
-    if(minutos_segundos<0 || minutos_segundos>59) throw out_of_range("Por lo menos hay un valor de la hora que se encuentran fuera del rango.");
+    if(minutos_segundos<0 || minutos_segundos>59) throw out_of_range("El valor de minutos o segundos está fuera del rango permitido (0-59).");
 }
+
 void Tiempo::validacion_entrada_abrev(string s){
-    if(s != "a.m." || s!= "p.m.") throw out_of_range("la abreviatura no corresponde a las solicitadas");
+    if(s != "a.m." && s != "p.m.") throw out_of_range("La abreviatura no corresponde a las solicitadas (a.m. o p.m.).");
 }
+
 
 //constructores
 Tiempo::Tiempo(): horas(0), minutos(0), segundos(0), abrev("a.m.") {} //constructor por lista
 Tiempo::Tiempo(int horas){
-    try{
-        validacion_entrada_horas(horas);
-        this -> horas= horas;
-    } catch (const out_of_range &e) {
-        cerr<<e.what()<<endl;
-    }
+  
+    validacion_entrada_horas(horas);
+    this -> horas= horas;
+    this->minutos = this->segundos = 0;
+    this->abrev = "a.m";
+
 }
 Tiempo::Tiempo(int horas, int minutos){
-    try{
-        validacion_entrada_horas(horas);
-        validacion_entrada_min_segs(minutos);
-        this -> horas= horas;
-        this-> minutos = minutos;
-        //si tengo distintas ecxepciones agarra la primera
-    } catch (const out_of_range &e) {
-        cerr<<e.what()<<endl;
-    }   
+  
+    validacion_entrada_horas(horas);
+    validacion_entrada_min_segs(minutos);
+    this -> horas= horas;
+    this-> minutos = minutos;
+    this->segundos = 0;
+    this->abrev = "a.m";
+      
 }
 Tiempo::Tiempo(int horas, int minutos, int segundos){
-    try{
-        validacion_entrada_horas(horas);
-        validacion_entrada_min_segs(minutos);
-        validacion_entrada_min_segs(segundos);
-        this -> horas= horas;
-        this -> minutos = minutos;
-        this -> segundos = segundos;
-        //si tengo distintas ecxepciones agarra la primera
-    } catch (const out_of_range &e) {
-        cerr<<e.what()<<endl;
-    }
+  
+    validacion_entrada_horas(horas);
+    validacion_entrada_min_segs(minutos);
+    validacion_entrada_min_segs(segundos);
+    this -> horas= horas;
+    this -> minutos = minutos;
+    this -> segundos = segundos;
+    this->abrev = "a.m";
+   
 }
 Tiempo::Tiempo(int horas, int minutos, int segundos, string abrev){
-    try{
-        validacion_entrada_horas(horas);
-        validacion_entrada_min_segs(minutos);
-        validacion_entrada_min_segs(segundos);
-        validacion_entrada_abrev(abrev);
-        this -> horas= horas;
-        this -> minutos = minutos;
-        this -> segundos = segundos;
-        this -> abrev = abrev;
-        //si tengo distintas ecxepciones agarra la primera
-    } catch (const out_of_range &e) {
-        cerr<<e.what()<<endl;
-    }
-   
+  
+    validacion_entrada_horas(horas);
+    validacion_entrada_min_segs(minutos);
+    validacion_entrada_min_segs(segundos);
+    validacion_entrada_abrev(abrev);
+    this -> horas= horas;
+    this -> minutos = minutos;
+    this -> segundos = segundos;
+    this -> abrev = abrev;
 }
 
 void Tiempo::setHoras(int horas){
-    this->horas = horas;
+  
+        validacion_entrada_horas(horas);
+        this -> horas= horas;
+   
 }
-void Tiempo::seyMinutos(int minutos){
-    this->minutos = minutos;
+void Tiempo::setMinutos(int minutos){
+    
+    validacion_entrada_min_segs(minutos);
+    this -> minutos = minutos;
+   
 }
 void Tiempo::setSegundos(int segundos){
-    this->segundos = segundos;
+    
+    validacion_entrada_min_segs(segundos);
+    this -> segundos = segundos;
+   
+}
+
+void Tiempo::setAbrev(string abrev){
+    
+    validacion_entrada_abrev(abrev);
+    this -> abrev = abrev;
+   
 }
 
 string Tiempo::string_formato(int n, char c){
@@ -96,19 +107,20 @@ void Tiempo::impresion_hora_completa(){
     cout<<setfill('0');
     cout<<setw(3)<<h<<":";
     cout<<setw(3)<<m<<":";
-    cout<<setw(3)<<h<<endl;
+    cout<<setw(3)<<s<<" "<<this->abrev<<endl;
 }
 void Tiempo::impresion_hora_24hs(){
-    if(abrev == "p.m"){
-        int horas = this->horas + 12;
-    }
+    int horas = this->horas;
+   
+    if(abrev == "p.m.") horas += 12;
+
     string h = string_formato(horas, 'h');
     string m = string_formato(minutos, 'm');
     string s = string_formato(segundos, 's');
     cout<<setfill('0');
     cout<<setw(3)<<h<<":";
     cout<<setw(3)<<m<<":";
-    cout<<setw(3)<<h<<endl;
+    cout<<setw(3)<<s<<endl;
     
 }
 

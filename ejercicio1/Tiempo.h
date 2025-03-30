@@ -22,8 +22,9 @@ class Tiempo {
         Tiempo(int horas, int minutos);
         Tiempo(int horas, int minutos, int segundos);
         void setHoras(int horas);
-        void seyMinutos(int minutos);
+        void setMinutos(int minutos);
         void setSegundos(int segundos);
+        void setAbrev(string abrev);
         void impresion_horas();
         void impresion_minutos();
         void impresion_segundos();
