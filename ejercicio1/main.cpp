@@ -9,6 +9,7 @@ void menu_inicial()
     cout << "4. Inicializar con hora(0-12), minutos(0-59) y segundos (0-59)" << endl;
     cout << "5. Inicializar con hora(0-12), minutos(0-59), segundos (0-59) y parte del día (a.m. | p.m.) " << endl;
     cout << "Seleccione una opción:" << endl;
+    
 }
 
 void menu_funcionalidades()
@@ -165,6 +166,8 @@ int main()
                     break;
                 }
                 }
+                cout << setfill('-') << setw(50) << "" << endl; 
+
             } while (opcion < 10 && opcion > 0);
             break;
         }
