@@ -2,7 +2,7 @@
 
 void menu_inicial()
 {
-    cout << "\nMenú de opciones:" << endl;
+    cout << "Menú de opciones:" << endl;
     cout << "1. Inicializar sin parámetros" << endl;
     cout << "2. Inicializar con hora (0-12)" << endl;
     cout << "3. Inicializar con hora y minutos(0-59)" << endl;
@@ -14,7 +14,7 @@ void menu_inicial()
 
 void menu_funcionalidades()
 {
-    cout << "\nMenú de opciones del tiempo creado:" << endl;
+    cout << "Menú de opciones del tiempo creado:" << endl;
     cout << "1. Setear hora (0-12)" << endl;
     cout << "2. Setear minutos (0-59)" << endl;
     cout << "3. Setear segundos (0-59)" << endl;
