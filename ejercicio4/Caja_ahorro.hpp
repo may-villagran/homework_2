@@ -1,6 +1,6 @@
 #pragma once
 #include "Cuenta.hpp"
-#include "Cuenta_corriente.hpp"
+class Cuenta_corrinete; //necesito la declaracion adelantada
 
 class Caja_ahorro : public Cuenta
 {
@@ -18,14 +18,14 @@ public:
      * @brief Constructor de la clase Caja_ahorro.
      * @param titular_nombre Nombre del titular de la cuenta.
      */
-    Caja_ahorro(string titular_nombre);
+    Caja_ahorro(const string &titular_nombre);
     /**
      * @brief Realiza un retiro de la cuenta de ahorro.
      * Este método sobrescribe el comportamiento de retiro de la clase base Cuenta.
      * Si el monto a retirar es mayor al balance disponible, no se realiza el retiro.
      * @param retiro_monto Monto a retirar de la cuenta.
      */
-    void retirar(double retiro_monto) override;
+    void retirar(float retiro_monto) override;
     /**
      * @brief Muestra la información de la cuenta.
      * Este método sobrescribe el comportamiento de mostrar información de la clase base.
