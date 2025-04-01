@@ -1,3 +1,4 @@
+#pragma once
 #include "Cuenta.hpp"
 #include "Cuenta_corriente.hpp"
 

@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Curso.h" // Asegúrate de que el archivo de encabezado esté correctamente incluido
+#include "Curso.hpp" // Asegúrate de que el archivo de encabezado esté correctamente incluido
 
 void menu_inicial()
 {
