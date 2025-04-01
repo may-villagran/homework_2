@@ -1,26 +1,39 @@
 #include "Estudiante.hpp"
 
+Estudiante::Estudiante(string nombre, string apellido, int num_legajo){
+    this->nombre_completo = apellido+", "+nombre;
+    this->num_legajo = num_legajo;
+    this->promedio_general = 0;
+}
 
+
+//Metodo internos
 ostream& operator<<(std::ostream& os, const Estudiante& estudiante) {
     os << estudiante.nombre_completo; //el objeto os ahora es el nombre compl del estudiante con la sobrecaga
     return os;
 }
 
-double Estudiante::calcular_promedio_general(vector<pair<string, double>> cursos_notas){
-    double promedio = 0;
-    for(pair<string, double> datos: cursos_notas){
-        double nota = datos.second;
-        promedio+=nota;
+void Estudiante::calcular_promedio_general(){
+    float promedio = 0;
+    for(pair<string, float> datos: this->cursos_notas){
+        float nota = datos.second;
+        if(nota != -1) promedio+=nota; //verifico que sea una nota valida
     }
-    promedio = promedio/ static_cast<double>(cursos_notas.size());
-    return promedio;
+    promedio = promedio/ static_cast<float>(cursos_notas.size());
+    this->promedio_general = promedio;
 }
 
-Estudiante::Estudiante(string nombre, string apellido, int num_legajo, vector<pair<string,double>>cursos_notas){
-    this->nombre_completo = apellido+", "+nombre;
-    this->num_legajo = num_legajo;
-    this->promedio_general = calcular_promedio_general(cursos_notas);
-    this->cursos_notas = cursos_notas;
+void Estudiante::definir_nota_curso(string curso_nombre, float nota_curso){
+    for(pair<string, float> &datos: this->cursos_notas){
+        if(curso_nombre == datos.first){
+            //encontro el curso
+            datos.second = nota_curso; //seteo la nota para el curso
+        }
+    }
+}
+
+void Estudiante::incribir_curso(string curso_nombre){
+    this->cursos_notas.push_back({curso_nombre, -1.0}); //agrego un pair
 }
 
 bool Estudiante::operator<(const Estudiante& otro_estudiante){
@@ -35,7 +48,8 @@ string Estudiante::getNombre(){
 int Estudiante::getLegajo(){
     return num_legajo;
 }
-double Estudiante::getPromedio(){
+float Estudiante::getPromedio(){
+    calcular_promedio_general();//actualizo el promedio antes
     return promedio_general;
 
 }

@@ -2,9 +2,6 @@
 
 int main(){
     map<string, pair<Cuenta_corriente, Caja_ahorro>> cuentas;
-
-
-
     string nombre_titular = "Nombre Apellido";
     //inicializacion caa ahorro
     Caja_ahorro caja_ahorro(nombre_titular);

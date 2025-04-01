@@ -1,44 +1,179 @@
 #include <iostream>
 #include "Curso.hpp" // Asegúrate de que el archivo de encabezado esté correctamente incluido
 
-void menu_inicial()
+void mostrarMenu()
 {
-    cout << "Menú de opciones:" << endl;
-    cout << "1. Inicializar curso" << endl;
-    cout << "2. Mostrar curso" << endl;
-    cout << "3. Crear estudiante" << endl;
-    cout << "4. Salir" << endl;
+    cout << "Menu de opciones" << endl;
+    cout << "1. Crear Estudiante" << endl;
+    cout << "2. Crear Curso" << endl;
+    cout << "3. Inscribir Estudiante a un Curso" << endl;
+    cout << "4. Cambiar nota del Estudiante" << endl;
+    cout << "5. Mostrar info de un Estudiante" << endl;
+    cout << "6. Mostrar info de Cursos" << endl;
+    cout << "7. Mostrar Estudiantes" << endl;
+    cout << "8. Mostrar Cursos" << endl;
+    cout << "9. Salir" << endl;
+    cout << "Seleccione una opción:" << endl;
 }
 
+// son repetitivas, se puede usar find de algorithm??
+void buscar_estudiante(vector<shared_ptr<Estudiante>> estudiantes_activos, int numero_legajo_estudiante, int &pos)
+{
+    for (int i = 0; i < estudiantes_activos.size(); i++)
+    {
+        if (estudiantes_activos[i]->getLegajo() == numero_legajo_estudiante)
+        {
+            pos = i; // si lo encunetra devuleve la pos
+            return;
+        }
+    }
+    pos = estudiantes_activos.size(); // sino quiero que devuleva el tam del arreglo
+}
 
+void buscar_curso(vector<shared_ptr<Curso>> cursos_activos, string nombre_curso, int &pos)
+{
+    for (int i = 0; i < cursos_activos.size(); i++)
+    {
+        if (cursos_activos[i]->nombre_curso == nombre_curso)
+        {
+            pos = i; // si lo encunetra devuleve la pos
+            return;
+        }
+    }
+    pos = cursos_activos.size(); // sino quiero que devuleva el tam del arreglo
+}
 
 int main()
 {
+    // estudiantes y cursos activos
+    vector<shared_ptr<Estudiante>> estudiantes_activos;
+    vector<shared_ptr<Curso>> cursos_activos;
+
     int opcion;
-    try{
-        
+    do
+    {
+        mostrarMenu();
+        cin >> opcion;
+        switch (opcion)
+        {
+        case 1:
+        {
+            string nombre, apellido;
+            int num_legajo;
+            cout << "Introduce el nombre del Estudiante: ";
+            cin >> nombre;
+            cout << "Introduce el apellido del Estudiante: ";
+            cin >> apellido;
+            cout << "Introduce el numero de legajo del Estudiante: ";
+            cin >> num_legajo;
+            estudiantes_activos.push_back(make_shared<Estudiante>(nombre, apellido, num_legajo));
+            cout << "El estudiante se ha inicializado.\n";
+            break;
+        }
+        case 2:
+        {
+            string nombre_curso;
+            cout << "Introduce el nombre del curso: ";
+            cin >> nombre_curso;
+            cursos_activos.push_back(make_shared<Curso>(nombre_curso));
+            cout << "El curso se ha inicializado.\n";
+            break;
+        }
+        case 3:
+        {
+            int num_legajo;
+            string nombre_curso;
+            cout << "Introduce el numero de legajo del Estudiante a inscribir: ";
+            cin >> num_legajo;
+            cout << "Introduce el nombre del curso a inscribir: ";
+            cin >> nombre_curso;
+            int pos_e, pos_c;
+            buscar_curso(cursos_activos, nombre_curso, pos_c);
+            buscar_estudiante(estudiantes_activos, num_legajo, pos_e);
 
+            if (pos_c == cursos_activos.size() || pos_e == estudiantes_activos.size())
+                cout << "El estudiante o el curso no existe, no se pudo agregar el estudiante" << endl;
+            else
+            {
+                cursos_activos[pos_c]->incribir_estudiante(estudiantes_activos[pos_e]); // si esta paso el ptr del estudiante
+                // la funncion se encarga de ajustar en estudiante y en el curso
+            }
+            break;
+        }
+        case 4:
+        {
+            int num_legajo;
+            string nombre_curso;
+            float nueva_nota;
+            cout << "Introduce el numero de legajo del Estudiante: ";
+            cin >> num_legajo;
+            cout << "Introduce el nombre del curso: ";
+            cin >> nombre_curso;
+            cout << "Introduce la nueva nota: ";
+            cin >> nueva_nota;
 
+            int pos_e, pos_c;
+            buscar_curso(cursos_activos, nombre_curso, pos_c);
+            buscar_estudiante(estudiantes_activos, num_legajo, pos_e);
 
-
-
-
-
-
-
-
-
-    }
-    catch(const runtime_error &e){
-        cerr<<e.what()<<endl; //curso lleno, no se pueden agregar más estudiantes
-    }
-    catch(const invalid_argument & e){
-        cerr<<e.what()<<endl; //caso donde el legajo ya esta en el curso
-    }
-    catch(const char* msj_estudiante_invalido){
-        cerr<<msj_estudiante_invalido;//caso donde se intenta borrar un estudiante que no está en el curso
-    }
-
+            if (pos_c == cursos_activos.size() || pos_e == estudiantes_activos.size())
+                cout << "El estudiante o el curso no existe, no se pudo cambiar la nota" << endl;
+            else
+                estudiantes_activos[pos_e]->definir_nota_curso(cursos_activos[pos_c]->nombre_curso, nueva_nota);
+            break;
+        }
+        case 5:
+        {
+            int num_legajo;
+            cin >> num_legajo;
+            int pos_e;
+            buscar_estudiante(estudiantes_activos, num_legajo, pos_e);
+            if (pos_e == estudiantes_activos.size())
+                cout << "El estudiante no existe." << endl;
+            else
+            {
+                cout << "Informacion del estudiante:" << endl;
+                // uso de los metodos de obtener datos
+                cout << "Nombre: " << estudiantes_activos[pos_e]->getNombre() << endl;
+                cout << "Legajo: " << estudiantes_activos[pos_e]->getLegajo() << endl;
+                cout << "Promedio: " << estudiantes_activos[pos_e]->getPromedio() << endl;
+            }
+            break;
+        }
+        case 6:
+        {
+            string nombre_curso;
+            cin >> nombre_curso;
+            int pos_c;
+            buscar_curso(cursos_activos, nombre_curso, pos_c);
+            if (pos_c == cursos_activos.size())
+                cout << "El curso no existe." << endl;
+            else cursos_activos[pos_c]->imprimir_listado();
+            break;
+        }
+        case 7:
+        {
+            cout << "Listado de estudiantes activos:\n";
+            for (const auto &estudiante : estudiantes_activos)
+                cout << estudiante->getNombre() << " con numero de legajo: " << estudiante->getLegajo() << endl;
+            break;
+        }
+        case 8:
+        {
+            cout << "Listado de cursos activos:\n";
+            for (const auto &curso : cursos_activos)
+                cout << curso->nombre_curso << endl;
+            break;
+        }
+        case 9:
+            cout << "Saliendo del programa.\n";
+            break;
+        default:
+            cout << "Opción no válida\n";
+        }
+    } while (opcion != 9);
+    int num_legajo;
+    cout << "Introduce el numero de legajo del Estudiante: ";
 
     return 0;
 }
