@@ -30,7 +30,7 @@ void menu_funcionalidades()
 
 void menu_error_rango()
 {
-    cout << "Ingrese una opción:" << endl;
+    cout << "Menu de opciones, valores incorrectos" << endl;
     cout << "1. volver a ingresar los valores" << endl;
     cout << "2. salir del programa" << endl;
 }

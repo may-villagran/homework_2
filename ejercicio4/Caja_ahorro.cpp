@@ -1,6 +1,6 @@
 
 #include "Caja_ahorro.hpp"
-Caja_ahorro::Caja_ahorro(const string &titular_nombre): Cuenta(titular_nombre), contador_mostrar_info(0), descuento_balance_info(20){}
+Caja_ahorro::Caja_ahorro(string titular_nombre): Cuenta(titular_nombre), contador_mostrar_info(0), descuento_balance_info(20){}
 
 bool Caja_ahorro::control_contador(){
     return contador_mostrar_info>2? true:false;

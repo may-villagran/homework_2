@@ -18,7 +18,7 @@ public:
      * @brief Constructor de la clase Caja_ahorro.
      * @param titular_nombre Nombre del titular de la cuenta.
      */
-    Caja_ahorro(const string &titular_nombre);
+    Caja_ahorro(string titular_nombre);
     /**
      * @brief Realiza un retiro de la cuenta de ahorro.
      * Este método sobrescribe el comportamiento de retiro de la clase base Cuenta.

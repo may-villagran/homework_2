@@ -10,7 +10,7 @@ public:
      * @param titular_nombre Nombre del titular de la cuenta.
      * @param caja_ahorro_asoc Caja_ahorro pasado por referencia
      */
-    Cuenta_corriente(const string &titular_nombre, Caja_ahorro* caja_ahorro_asoc);
+    Cuenta_corriente(string titular_nombre, Caja_ahorro* caja_ahorro_asoc);
     /**
      * @bried Realiza un retiro de la cuenta corriente
      * @note Si la cuenta no cuenta corriente no cuenta con el dinero suficiente, efectua el retiro de la caja de ahorro
@@ -26,5 +26,5 @@ public:
     ~Cuenta_corriente();
 
 private:
-    Caja_ahorro* caja_ahorro_asociada; ///< Objeto Caja_ahorro pasado por referencia
+    Caja_ahorro* caja_ahorro_asociada; ///< puntero a objeto caja de ahorro
 };

@@ -12,7 +12,7 @@ class Cuenta{
      * @param titular_nombre Nombre del titular de la cuenta
          * @note inicializa el balance e n  0
          */
-        Cuenta(const string &titular_nombre);
+        Cuenta(string titular_nombre);
         /**
          * @brief Ingresa dinero a la cuenta
          * @param deposito_monto Monto a ingresar en la cuenta

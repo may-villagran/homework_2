@@ -1,6 +1,6 @@
 #include "Cuenta_corriente.hpp"
 
-Cuenta_corriente::Cuenta_corriente(const string &titular_nombre, Caja_ahorro *caja_ahorro_asoc)
+Cuenta_corriente::Cuenta_corriente(string titular_nombre, Caja_ahorro *caja_ahorro_asoc)
     : Cuenta(titular_nombre), caja_ahorro_asociada(caja_ahorro_asoc) {}
 
 Cuenta_corriente::~Cuenta_corriente() {
