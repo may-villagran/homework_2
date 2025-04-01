@@ -1,4 +1,4 @@
-#include "Tiempo.h"
+#include "Tiempo.hpp"
 
 void menu_inicial()
 {

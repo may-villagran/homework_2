@@ -32,6 +32,7 @@ Tiempo::Tiempo(int horas, int minutos, int segundos, string abrev)
     validacion_entrada_min_segs(minutos);
     validacion_entrada_min_segs(segundos);
     validacion_entrada_abrev(abrev);
+    if(horas == 0 && abrev=="p.m") horas = 12; //como no existe 00h p.m, le sumo doce 
     this->horas = horas;
     this->minutos = minutos;
     this->segundos = segundos;
@@ -57,6 +58,7 @@ void Tiempo::setSegundos(int segundos)
 void Tiempo::setAbrev(string abrev)
 {
     validacion_entrada_abrev(abrev);
+    if(this->horas == 0 && abrev=="p.m") this->horas = 12; //como no existe 00h p.m, le sumo doce 
     this->abrev = abrev;
 }
 
