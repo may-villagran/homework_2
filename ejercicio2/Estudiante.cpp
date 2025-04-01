@@ -1,4 +1,4 @@
-#include "Estudiante.h"
+#include "Estudiante.hpp"
 
 
 ostream& operator<<(std::ostream& os, const Estudiante& estudiante) {
