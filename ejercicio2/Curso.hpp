@@ -10,24 +10,6 @@ using namespace std;
  */
 class Curso
 {
-private:
-    vector<shared_ptr<Estudiante>> listado_estudiantes; ///< vector de tipo shared_ptr que apuntas a objetos de tipo Estudiante
-    /**
-     * @brief Obtiene los legajos de los estudiantes del curso.
-     * @return vector<int> con los números de legajos de los estudiantes
-     * @throw runtime_error si no hay estudiantes en el curso.
-     */
-    vector<int> legajos_estudiantes();
-
-    /**
-     * @brief Encuentra la posición de un estudiante en el listado.
-     * Método privado que busca un estudiante en el vector de estudiantes y devuelve su posición.
-     * @param estudiante shared_ptr al estudiante que se desea buscar.
-     * @param pos Referencia a un entero donde se almacenará la posición del estudiante en el vector.
-     * @throw invalid_argument si el estudiante no está inscrito en el curso.
-     */
-    void encontrar_estudiante(int numero_legajo_estudiante, int &pos);
-
 public:
     string nombre_curso; ///< string con el nombre que identidica el curso
 
@@ -96,4 +78,22 @@ public:
      * @throw runtime_error si no hay estudiantes en el curso.
      */
     void imprimir_listado();
+
+private:
+    vector<shared_ptr<Estudiante>> listado_estudiantes; ///< vector de tipo shared_ptr que apuntas a objetos de tipo Estudiante
+    /**
+     * @brief Obtiene los legajos de los estudiantes del curso.
+     * @return vector<int> con los números de legajos de los estudiantes
+     * @throw runtime_error si no hay estudiantes en el curso.
+     */
+    vector<int> legajos_estudiantes();
+
+    /**
+     * @brief Encuentra la posición de un estudiante en el listado.
+     * Método privado que busca un estudiante en el vector de estudiantes y devuelve su posición.
+     * @param estudiante shared_ptr al estudiante que se desea buscar.
+     * @param pos Referencia a un entero donde se almacenará la posición del estudiante en el vector.
+     * @throw invalid_argument si el estudiante no está inscrito en el curso.
+     */
+    void encontrar_estudiante(int numero_legajo_estudiante, int &pos);
 };

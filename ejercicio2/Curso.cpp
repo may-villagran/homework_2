@@ -1,8 +1,10 @@
 #include "Curso.hpp"
 
+
 Curso::Curso(string nombre): nombre_curso(nombre){} //constructor de lista
 //constructor de copia shallow
-Curso::Curso(const Curso &curso_original, string nombre_curso_nuevo): nombre_curso(nombre_curso_nuevo), listado_estudiantes(curso_original.listado_estudiantes){}
+Curso::Curso(const Curso &curso_original, string nombre_curso_nuevo)
+    : nombre_curso(nombre_curso_nuevo), listado_estudiantes(curso_original.listado_estudiantes) {}
 
 bool comparar_estudiantes_desreferencia(const shared_ptr<Estudiante>& estudiante1, const shared_ptr<Estudiante>& estudiante2) {
     return *estudiante1< *estudiante2;
@@ -17,7 +19,7 @@ vector<int> Curso::legajos_estudiantes(){
 }
 
 void Curso::encontrar_estudiante(int numero_legajo_estudiante, int &pos){
-    for (int i = 0; i < listado_estudiantes.size(); i++) {
+    for (int i = 0; i < static_cast<int>(listado_estudiantes.size()); i++) {
         if (listado_estudiantes[i]->getLegajo() == numero_legajo_estudiante) {
             pos = i;//si lo encunetra devuleve la pos
             return;
@@ -30,10 +32,12 @@ bool Curso::curso_completo(){
     return listado_estudiantes.size() > 20;
 }
 
+
+//en todos estos metodos podria usar el numero de legajo para desincribir 
 bool Curso::verificacion_inscripcion(int numero_legajo_estudiante){
     int pos = 0;
     encontrar_estudiante(numero_legajo_estudiante, pos);
-    return pos != listado_estudiantes.size(); //si se retorna una pos val está el estudiante
+    return pos != static_cast<int>(listado_estudiantes.size()); //si se retorna una pos val está el estudiante
 }
 
 void Curso::incribir_estudiante(shared_ptr<Estudiante> estudiante){
@@ -47,7 +51,8 @@ void Curso::incribir_estudiante(shared_ptr<Estudiante> estudiante){
 void Curso::desinscribir_estudiante(int numero_legajo_estudiante){
     int pos = 0;
     encontrar_estudiante(numero_legajo_estudiante, pos);
-    if (pos == listado_estudiantes.size()) throw("El estudiante que desea eliminar no se encuentra en el curso");
+    if (pos == static_cast<int>(listado_estudiantes.size())) throw("El estudiante que desea eliminar no se encuentra en el curso");
+    listado_estudiantes[pos]->desinscribir_curso(nombre_curso); //desincribo del objeto estudiante
     listado_estudiantes.erase(listado_estudiantes.begin() + pos);
 }
 

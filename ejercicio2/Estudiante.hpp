@@ -23,12 +23,13 @@ private:
      */
     void calcular_promedio_general();
     /**
-     * @brief Setea una nota a un estudiante para un determinado curso.
-     * @param nota_curso float que contiene la nota del estudiante
-     * @param curso_nombre nombre del curso a buscar y cambiar el nombre
-     * @note Este método es privado
+     * @brief chequea si una materia existe en los cursos de los alumnos
+     * Busca en el vector<pair<string, float>> si existe un string que coincida con el nombre
+     * @param nombre_curso nombre del curso a buscar
+     * @param pos Referencia de la posicion
+     * @note si la pos no existe entonces pos = size(vector) de lo contrario pasa la posicion
      */
-  
+    void existe_curso(string nombre_curso, int&pos);
     /**
      * @brief Inscribe al estudiante en un curso específico.
      * Este método agrega un curso al vector de cursos del estudiante con una nota inicial de -1,
@@ -36,6 +37,13 @@ private:
      * @param curso_nombre El nombre del curso al que se inscribirá el estudiante.
      */
     void incribir_curso(string curso_nombre);
+
+    /**
+     * @brief Desinscribe al estudiante de un curso específico.
+     * Este método elimina un curso del vector de cursos del estudiante.
+     * @param curso_nombre El nombre del curso del que se desinscribirá el estudiante.
+     */
+    void desinscribir_curso(string curso_nombre);
 
 public:
     /**
@@ -92,6 +100,8 @@ public:
      * @param nota_curso La calificación obtenida en el curso (valor flotante).
      */
     void definir_nota_curso(string curso_nombre, float nota_curso);
+
+    void imprimir_cursos();
 
     friend class Curso;
 };
