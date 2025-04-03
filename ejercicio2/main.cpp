@@ -12,7 +12,7 @@ void mostrarMenu()
     cout << "6. Mostrar info de un Estudiante" << endl;
     cout << "7. Mostrar info de Cursos" << endl;
     cout << "8. Mostrar Estudiantes" << endl;
-    cout << "9. Mostrar Cursos" << endl;
+    cout << "9. Mostrar Curso" << endl;
     cout << "10. Copiar Curso, cambiando el nombre" << endl;
     cout << "11. Salir" << endl;
     cout << "Seleccione una opción:";
