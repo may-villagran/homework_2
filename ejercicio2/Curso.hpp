@@ -22,12 +22,9 @@ public:
     Curso(string nombre);
 
     /**
-     * @brief Constructor de copia superficial (Shallow Copy).
-     * Crea un nuevo curso copiando el listado de estudiantes de otro curso existente.
-     * Este constructor utiliza copia superficial ya que los estudiantes son gestionados mediante shared_ptr,
-     * lo que permite compartir la misma instancia de Estudiante entre múltiples cursos sin duplicar objetos.
-     * Ya que no necesitamos distintas instancias para un mismo objeto, ademas no tenemos problemas si se desea
-     * borrar una clase, ya que el shared ptr permite borrar cuando nadie apunta hacia el objeto
+     * @brief Constructor de copia superficial (Shallow Copy) 
+     * Crea un nuevo curso copiando los punteros de los estudiantes del curso original, creando un vector nuevo para el objeto y pasandole como 
+     * contenido los valores de los ptrs.
      * @param curso_original Referencia constante al curso original del cual se copiarán los estudiantes.
      * @param nombre_curso_nuevo Nombre del nuevo curso.
      * @throw invalid_argument si el nombre del nuevo curso está vacío.

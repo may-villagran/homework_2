@@ -10,9 +10,9 @@ void mostrarMenu()
     cout << "4. Desinscribir Estudiante de un Curso" << endl;
     cout << "5. Cambiar nota del Estudiante" << endl;
     cout << "6. Mostrar info de un Estudiante" << endl;
-    cout << "7. Mostrar info de Cursos" << endl;
-    cout << "8. Mostrar Estudiantes" << endl;
-    cout << "9. Mostrar Curso" << endl;
+    cout << "7. Mostrar info de Curso" << endl;
+    cout << "8. Mostrar Estudiantes activos" << endl;
+    cout << "9. Mostrar Cursos activos" << endl;
     cout << "10. Copiar Curso, cambiando el nombre" << endl;
     cout << "11. Salir" << endl;
     cout << "Seleccione una opción:";
@@ -47,7 +47,6 @@ void buscar_curso(vector<shared_ptr<Curso>> cursos_activos, string nombre_curso,
 
 int main()
 {
-
     // estudiantes y cursos activos
     vector<shared_ptr<Estudiante>> estudiantes_activos;
     vector<shared_ptr<Curso>> cursos_activos;
@@ -83,50 +82,74 @@ int main()
             cout << "El curso se ha inicializado.\n";
             break;
         }
+
         case 3:
         {
-            int num_legajo;
-            string nombre_curso;
-            cout << "Introduce el numero de legajo del Estudiante a inscribir: ";
-            cin >> num_legajo;
-            cout << "Introduce el nombre del curso a inscribir: ";
-            cin >> nombre_curso;
-            int pos_e, pos_c;
-            buscar_curso(cursos_activos, nombre_curso, pos_c);
-            buscar_estudiante(estudiantes_activos, num_legajo, pos_e);
-
-            if (pos_c == static_cast<int>(cursos_activos.size()) || pos_e == static_cast<int>(estudiantes_activos.size()))
-                cout << "El estudiante o el curso no existe, no se pudo agregar el estudiante" << endl;
-            else
+            try
             {
-                cursos_activos[pos_c]->incribir_estudiante(estudiantes_activos[pos_e]); // si esta paso el ptr del estudiante
-                // la funncion se encarga de ajustar en estudiante y en el curso
-                cout << "Se inscribio el estudiante al curso" << endl;
+                int num_legajo;
+                string nombre_curso;
+                cout << "Introduce el numero de legajo del Estudiante a inscribir: ";
+                cin >> num_legajo;
+                cout << "Introduce el nombre del curso a inscribir: ";
+                cin >> nombre_curso;
+                int pos_e, pos_c;
+                buscar_curso(cursos_activos, nombre_curso, pos_c);
+                buscar_estudiante(estudiantes_activos, num_legajo, pos_e);
+
+                if (pos_c == static_cast<int>(cursos_activos.size()) || pos_e == static_cast<int>(estudiantes_activos.size()))
+                    cout << "El estudiante o el curso no existe, no se pudo agregar el estudiante" << endl;
+                else
+                {
+                    cursos_activos[pos_c]->incribir_estudiante(estudiantes_activos[pos_e]); // si esta paso el ptr del estudiante
+                    // la funncion se encarga de ajustar en estudiante y en el curso
+                    cout << "Se inscribio el estudiante al curso" << endl;
+                }
             }
+
+            catch (const runtime_error &e)
+            {
+                cout << e.what(); // caso donde el curso se encuentra completo
+            }
+            catch (const invalid_argument &e)
+            {
+                cout << e.what() << endl; // se intenta crear un estudiante con un numero de legajo existemte
+                continue;
+            }
+
             break;
         }
+
         case 4:
         {
-            int num_legajo;
-            string nombre_curso;
-            cout << "Introduce el numero de legajo del Estudiante a inscribir: ";
-            cin >> num_legajo;
-            cout << "Introduce el nombre del curso a desincribir: ";
-            cin >> nombre_curso;
-            int pos_e, pos_c;
-            buscar_curso(cursos_activos, nombre_curso, pos_c);
-            buscar_estudiante(estudiantes_activos, num_legajo, pos_e);
-
-            if (pos_c == static_cast<int>(cursos_activos.size()) || pos_e == static_cast<int>(estudiantes_activos.size()))
-                cout << "El estudiante o el curso no existe, no se pudo agregar el estudiante" << endl;
-            else
+            try
             {
-                cursos_activos[pos_c]->desinscribir_estudiante(estudiantes_activos[pos_e]->getLegajo()); // si esta paso el num de legajo del estudiante
-                // la funncion se encarga de ajustar en estudiante y en el curso
-                cout << "Se desincribio el estudiante al curso" << endl;
+                int num_legajo;
+                string nombre_curso;
+                cout << "Introduce el numero de legajo del Estudiante a desinscribir: ";
+                cin >> num_legajo;
+                cout << "Introduce el nombre del curso a desincribir: ";
+                cin >> nombre_curso;
+                int pos_e, pos_c;
+                buscar_curso(cursos_activos, nombre_curso, pos_c);
+                buscar_estudiante(estudiantes_activos, num_legajo, pos_e);
+
+                if (pos_c == static_cast<int>(cursos_activos.size()) || pos_e == static_cast<int>(estudiantes_activos.size()))
+                    cout << "El estudiante o el curso no existe, no se pudo agregar el estudiante" << endl;
+                else
+                {
+                    cursos_activos[pos_c]->desinscribir_estudiante(estudiantes_activos[pos_e]->getLegajo()); // si esta paso el num de legajo del estudiante
+                    // la funncion se encarga de ajustar en estudiante y en el curso
+                    cout << "Se desincribio el estudiante al curso" << endl;
+                }
+                break;
+            }catch (const char *mensaje)
+            {
+                cout << mensaje << endl; // caso donde intento desinscribir y no existe el alumno en el curso
+                continue;
             }
-            break;
         }
+            
         case 5:
         {
             int num_legajo;
@@ -218,12 +241,13 @@ int main()
             break;
         }
 
-        case 11:{
-            cout << "Saliendo del programa"<<endl;
+        case 11:
+        {
+            cout << "Saliendo del programa" << endl;
             break;
         }
         default:
-            cout << "Opción no válida"<<endl;
+            cout << "Opción no válida" << endl;
         }
     } while (opcion != 11);
 

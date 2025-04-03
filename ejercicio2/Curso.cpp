@@ -4,7 +4,12 @@
 Curso::Curso(string nombre): nombre_curso(nombre){} //constructor de lista
 //constructor de copia shallow
 Curso::Curso(const Curso &curso_original, string nombre_curso_nuevo)
-    : nombre_curso(nombre_curso_nuevo), listado_estudiantes(curso_original.listado_estudiantes) {}
+    : nombre_curso(nombre_curso_nuevo), listado_estudiantes(curso_original.listado_estudiantes) {
+        //los iscribo cada uno al curso
+        for(shared_ptr<Estudiante> ptr_estudiante: this->listado_estudiantes){
+            ptr_estudiante->incribir_curso(nombre_curso_nuevo); // inscribo a cada uno a la meteria nueva
+        }
+    }
 
 bool comparar_estudiantes_desreferencia(const shared_ptr<Estudiante>& estudiante1, const shared_ptr<Estudiante>& estudiante2) {
     return *estudiante1< *estudiante2;
