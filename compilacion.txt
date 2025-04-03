@@ -1,0 +1,16 @@
+# Ejercicio 1
+    g++ -Wall -Wextra -Werror Tiempo.cpp main.cpp -o main
+    valgrind ./ main
+
+# Ejercicio 2
+    g++ -Wall -Wextra -Werror Curso.cpp Estudiante.cpp main.cpp -o main
+    valgrind ./ main
+
+
+# Ejercicio 3
+    g++ -Wall -Wextra -Werror Numero.cpp Complejo.cpp Entero.cpp Real.cpp main.cpp -o main
+    valgrind ./ main
+
+# Ejercicio 4
+    g++ -Wall -Wextra -Werror Cuenta.cpp Caja_ahorro.cpp Cuenta_corriente.cpp main.cpp -o main
+    valgrind ./ mains
