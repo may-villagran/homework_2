@@ -34,7 +34,7 @@ void Curso::encontrar_estudiante(int numero_legajo_estudiante, int &pos){
 }
 
 bool Curso::curso_completo(){
-    return listado_estudiantes.size() > 20;
+    return listado_estudiantes.size() >= 20;
 }
 
 

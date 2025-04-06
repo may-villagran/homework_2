@@ -50,9 +50,18 @@ int main()
     // estudiantes y cursos activos
     vector<shared_ptr<Estudiante>> estudiantes_activos;
     vector<shared_ptr<Curso>> cursos_activos;
+    // Inicialización del curso
+    cursos_activos.push_back(make_shared<Curso>("curso1"));
+    // Creación de 19 estudiantes e inscripción en el curso
+    for (int i = 1; i <= 19; i++)
+    {
+        shared_ptr<Estudiante> estudiante = make_shared<Estudiante>("nombre" + to_string(i), "apellido" + to_string(i), i);
+        estudiantes_activos.push_back(estudiante);
+        cursos_activos[0]->incribir_estudiante(estudiante);
+    }
+    cout << "El programa se encuentra con un curso, con nombre \"curso1\" inicializado con 19 estudiantes" << endl;
 
     int opcion;
-
     do
     {
         mostrarMenu();
@@ -143,13 +152,14 @@ int main()
                     cout << "Se desincribio el estudiante al curso" << endl;
                 }
                 break;
-            }catch (const char *mensaje)
+            }
+            catch (const char *mensaje)
             {
                 cout << mensaje << endl; // caso donde intento desinscribir y no existe el alumno en el curso
                 continue;
             }
         }
-            
+
         case 5:
         {
             int num_legajo;
