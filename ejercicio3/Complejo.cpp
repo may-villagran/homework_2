@@ -4,7 +4,7 @@ Complejo::~Complejo(){}
 Complejo::Complejo(float parte_real, float parte_imaginario): real(parte_real), imaginario(parte_imaginario){}
 
 float Complejo::getReal(){ return this->real;}
-float Complejo::getImaginario(){return this->real;}
+float Complejo::getImaginario(){return this->imaginario;}
 
 unique_ptr<Numero> Complejo::operator+(Numero &otro_numero)
 {
